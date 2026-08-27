@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Tiffindose</title>
+    <link rel="stylesheet" href="/global.css">
+</head>
+<body>
+    <!-- Top Admin Header Ribbon -->
+    <header class="top-nav-bar">
+        <div class="brand-side">
+            <span class="brand-title">Tiffindose Admin 🛡️</span>
+        </div>
+        <div class="nav-right-admin">
+            <a href="/login" class="nav-btn logout-btn">Logout</a>
+        </div>
+    </header>
+
+    <!-- Main Admin Container -->
+    <main class="admin-main-content">
+        <div class="admin-card">
+            <div class="admin-header">
+                <h2>User Subscriptions Management</h2>
+                <p>Overview of all registered users and their meal statuses</p>
+            </div>
+
+            <% if (typeof users !== 'undefined' && users.length > 0) { %>
+                
+                <!-- 1. DESKTOP VIEW: Clean Table -->
+                <div class="desktop-table-view">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% users.forEach(user => { %>
+                                    <tr>
+                                        <td><strong><%= user.name %></strong></td>
+                                        <td><%= user.email %></td>
+                                        <td><span class="table-address"><%= user.address %></span></td>
+                                        <td>
+                                            <span class="<%= user.isMealPaused ? 'status-paused' : 'status-active' %>">
+                                                <%= user.isMealPaused ? 'Paused 🔴' : 'Active 🟢' %>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="sub-text">Managed</span>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 2. MOBILE VIEW: Stacked Cards (No horizontal scroll) -->
+                <div class="mobile-cards-view">
+                    <% users.forEach(user => { %>
+                        <div class="user-info-card">
+                            <div class="mob-card-header">
+                                <span class="mob-user-name">👤 <%= user.name %></span>
+                                <span class="<%= user.isMealPaused ? 'status-paused' : 'status-active' %>">
+                                    <%= user.isMealPaused ? 'Paused 🔴' : 'Active 🟢' %>
+                                </span>
+                            </div>
+                            <div class="mob-card-body">
+                                <p><strong>Email:</strong> <%= user.email %></p>
+                                <p><strong>Address:</strong> <%= user.address %></p>
+                                <p><strong>Action:</strong> <span class="sub-text">Managed</span></p>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+
+            <% } else { %>
+                <div class="no-users-box">
+                    <p>No users found or data loading...</p>
+                </div>
+            <% } %>
+
+            <div class="admin-footer-link">
+                <a href="/login">← Back to User Login</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

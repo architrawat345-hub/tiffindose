@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Tiffindose</title>
+    <link rel="stylesheet" href="/global.css">
+</head>
+<body>
+    <!-- Top Mobile / Clean Header with Hamburger Trigger -->
+    <header class="top-nav-bar">
+        <div class="brand-side">
+            <!-- Hamburger Menu Button (3 lines) -->
+            <button class="hamburger-btn" onclick="toggleDrawer()">☰</button>
+            <span class="brand-title">Tiffindose 🍛</span>
+        </div>
+        <div class="user-badge">
+            <span>👤 <%= user.name %></span>
+        </div>
+    </header>
+
+    <!-- Slide-out Side Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <aside class="side-drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <h3>Menu</h3>
+            <button class="close-btn" onclick="toggleDrawer()">✕</button>
+        </div>
+        
+        <div class="drawer-links">
+            <a href="/dashboard/<%= user._id %>" class="drawer-item active">📊 Dashboard</a>
+            <a href="/settings/<%= user._id %>" class="drawer-item">⚙️ Settings & Profile</a>
+            <a href="/logout" class="drawer-item logout-item">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main-content">
+        <div class="dashboard-grid">
+            
+            <!-- Left Box: Profile & Address Info -->
+            <div class="panel profile-panel">
+                <h3>Customer Profile</h3>
+                <div class="info-group">
+                    <label>Full Name</label>
+                    <p class="info-value"><%= user.name %></p>
+                </div>
+                <div class="info-group">
+                    <label>Email Address</label>
+                    <p class="info-value"><%= user.email %></p>
+                </div>
+                <div class="info-group">
+                    <label>Delivery Address</label>
+                    <p class="info-value address-text"><%= user.address %></p>
+                </div>
+            </div>
+
+            <!-- Right Box: Meal Management -->
+            <div class="panel control-panel">
+                <h3>Meal Subscription</h3>
+                <div class="status-box">
+                    <span>Current Status:</span>
+                    <span class="<%= user.isMealPaused ? 'status-paused' : 'status-active' %>">
+                        <%= user.isMealPaused ? 'Paused 🔴' : 'Active 🟢' %>
+                    </span>
+                </div>
+
+                <form action="/toggle-meal/<%= user._id %>" method="POST">
+                    <button type="submit" class="action-btn">
+                        <%= user.isMealPaused ? 'Resume Meal for Tomorrow' : 'Pause Meal for Tomorrow' %>
+                    </button>
+                </form>
+
+                <div class="notice-text">
+                    💡 Please ensure you modify your meal status before 9:00 PM for the upcoming delivery cycle.
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Simple JavaScript for Drawer Toggle -->
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('sideDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

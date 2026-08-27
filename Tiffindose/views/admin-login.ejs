@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Tiffindose</title>
+    <link rel="stylesheet" href="/global.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="card auth-card">
+            <div class="auth-header">
+                <h2>Admin Portal 🛡️</h2>
+                <p>Enter credentials to access admin controls</p>
+            </div>
+
+            <!-- Error message show karne ke liye agar password galat ho -->
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); color: #f87171; padding: 10px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 15px; text-align: center;">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <form action="/admin-login" method="POST">
+                <div class="input-group">
+                    <label>Admin Username / Email</label>
+                    <input type="text" name="username" placeholder="Enter admin username" required />
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter admin password" required />
+                </div>
+
+                <button type="submit" class="action-btn">Login as Admin</button>
+            </form>
+
+            <div class="auth-footer">
+                <p><a href="/login">← Back to User Login</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

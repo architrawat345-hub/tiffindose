@@ -1,0 +1,724 @@
+/* ==========================================================
+   Tiffindose - Professional Corporate Dashboard Theme
+   ========================================================== */
+
+/* --- Global Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #0f172a; /* Deep Slate / Navy background */
+    color: #cbd5e1; /* Soft slate text */
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Top Clean Navbar (Hamburger & Brand) --- */
+.top-nav-bar {
+    background-color: #162032;
+    border-bottom: 1px solid #334155;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-top: 0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.brand-side {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hamburger-btn {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 6px;
+    width: auto !important;
+    transition: background-color 0.2s;
+}
+
+.hamburger-btn:hover {
+    background-color: #334155;
+}
+
+.brand-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.user-badge {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #f1f5f9;
+}
+
+/* --- Slide-out Side Drawer --- */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background-color: #162032;
+    border-right: 1px solid #334155;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+}
+
+.side-drawer.open {
+    left: 0;
+}
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+    display: none;
+}
+
+.drawer-overlay.open {
+    display: block;
+}
+
+.drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 15px;
+}
+
+.drawer-header h3 {
+    color: #f8fafc;
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: auto !important;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+.drawer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.drawer-item {
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.drawer-item:hover, .drawer-item.active {
+    background-color: #1e293b;
+    color: #f8fafc;
+}
+
+.logout-item {
+    color: #f87171 !important;
+    background: rgba(248, 113, 113, 0.05);
+    border: 1px solid rgba(248, 113, 113, 0.15);
+    margin-top: 20px;
+}
+
+.logout-item:hover {
+    background: rgba(248, 113, 113, 0.15) !important;
+}
+
+/* --- Dashboard Main Layout --- */
+.dashboard-main-content {
+    max-width: 1100px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.panel {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.panel h3 {
+    color: #f8fafc;
+    font-size: 1.15rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #334155;
+}
+
+/* Profile Panel Styles */
+.info-group {
+    margin-bottom: 16px;
+}
+
+.info-group label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    color: #f1f5f9;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.address-text {
+    word-break: break-word;
+}
+
+/* Control Panel Styles */
+.status-box {
+    background: #0f172a;
+    border: 1px solid #334155;
+    padding: 14px 18px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.status-active {
+    color: #34d399;
+    font-weight: 600;
+}
+
+.status-paused {
+    color: #f87171;
+    font-weight: 600;
+}
+
+.action-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    margin-bottom: 16px;
+}
+
+.action-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.notice-text {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.5;
+    background: rgba(59, 130, 246, 0.05);
+    border-left: 3px solid #3b82f6;
+    padding: 10px 12px;
+    border-radius: 0 6px 6px 0;
+}
+
+/* --- Authentication Pages (Login / Signup) Styling --- */
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+body:has(.auth-wrapper) {
+    justify-content: flex-start;
+    padding-top: 8vh;
+}
+
+.auth-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 40px 35px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: left !important;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-header h2 {
+    color: #f8fafc;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+}
+
+.auth-header p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 13px 16px;
+    background-color: #0f172a;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    color: #f8fafc;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    margin-bottom: 0 !important;
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.auth-card .action-btn {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #2563eb;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.auth-footer {
+    text-align: center;
+    border-top: 1px solid #334155;
+    padding-top: 15px;
+}
+
+.auth-footer p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 0;
+}
+
+.auth-footer a {
+    color: #34d399 !important;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    color: #6ee7b7 !important;
+    text-decoration: underline;
+}
+
+/* --- Settings Page Compact Styling --- */
+.settings-main-content {
+    max-width: 580px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.settings-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 30px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.settings-header {
+    margin-bottom: 16px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 12px;
+}
+
+.settings-header h2 {
+    color: #f8fafc;
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+}
+
+.settings-header p {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.settings-card input, 
+.settings-card textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: #0f172a;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    color: #f8fafc;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.settings-card textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.settings-card input:focus, 
+.settings-card textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.disabled-input {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #090d16 !important;
+}
+
+/* Perfectly Aligned Settings Buttons */
+.settings-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.settings-actions .action-btn {
+    margin-top: 0 !important;
+    flex: 1;
+    padding: 11px 16px;
+    font-weight: 600;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+}
+
+.cancel-btn {
+    flex: 1;
+    text-align: center;
+    background-color: #0f172a;
+    border: 1px solid #475569;
+    color: #cbd5e1;
+    padding: 11px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+}
+
+.cancel-btn:hover {
+    background-color: #334155;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-main-content {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .settings-main-content {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .auth-card {
+        padding: 30px 20px;
+    }
+}
+/* ==========================================================
+   Admin Dashboard Professional Styling
+   ========================================================== */
+
+.admin-main-content {
+    max-width: 1100px;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 20px;
+    flex-grow: 1;
+}
+
+.admin-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.admin-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 15px;
+}
+
+.admin-header h2 {
+    color: #f8fafc;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.admin-header p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* --- Admin Table Modern Layout --- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 10px; /* Rows ke beech mein clean gap dene ke liye */
+    margin-top: 10px;
+}
+
+.admin-table th {
+    background-color: #0f172a; 
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    padding: 14px 18px;
+    text-align: left;
+    border-top: 1px solid #334155;
+    border-bottom: 1px solid #334155;
+}
+
+.admin-table th:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; border-left: 1px solid #334155; }
+.admin-table th:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-right: 1px solid #334155; }
+
+.admin-table td {
+    padding: 16px 18px;
+    text-align: left;
+    background-color: #0f172a; 
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    border-top: 1px solid #334155;
+    border-bottom: 1px solid #334155;
+}
+
+/* Rounded corners for table rows */
+.admin-table tr td:first-child { 
+    border-top-left-radius: 8px; 
+    border-bottom-left-radius: 8px; 
+    border-left: 1px solid #334155;
+}
+
+.admin-table tr td:last-child { 
+    border-top-right-radius: 8px; 
+    border-bottom-right-radius: 8px; 
+    border-right: 1px solid #334155;
+}
+
+.table-address {
+    display: inline-block;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    color: #94a3b8;
+}
+
+.admin-footer-link {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #334155;
+    text-align: left;
+}
+
+.admin-footer-link a {
+    color: #60a5fa;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.admin-footer-link a:hover {
+    text-decoration: underline;
+}
+
+.nav-right-admin {
+    display: flex;
+    align-items: center;
+}
+/* --- Desktop vs Mobile Views Toggle --- */
+.mobile-cards-view {
+    display: none; /* Desktop par chhupa rahega */
+}
+
+.desktop-table-view {
+    display: block; /* Desktop par table dikhega */
+}
+
+/* --- Mobile Stacked Cards Styling --- */
+.user-info-card {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.mob-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e293b;
+}
+
+.mob-user-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f8fafc;
+}
+
+.mob-card-body p {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.mob-card-body p strong {
+    color: #cbd5e1;
+}
+
+.no-users-box {
+    text-align: center;
+    color: #94a3b8;
+    padding: 30px;
+    background: #0f172a;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+/* --- Media Query for Mobile Screen Switching --- */
+@media (max-width: 768px) {
+    .desktop-table-view {
+        display: none !important; /* Mobile par table hide ho jayegi */
+    }
+
+    .mobile-cards-view {
+        display: block !important; /* Mobile par cards show ho jayenge */
+    }
+
+    .admin-card {
+        padding: 20px 15px; /* Mobile par admin card ki padding compact ki */
+    }
+
+    .admin-main-content {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+}
