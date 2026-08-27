@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - Tiffindose</title>
+    <link rel="stylesheet" href="/global.css">
+</head>
+<body>
+    <!-- Top Clean Navbar with Hamburger -->
+    <header class="top-nav-bar">
+        <div class="brand-side">
+            <button class="hamburger-btn" onclick="toggleDrawer()">☰</button>
+            <span class="brand-title">Tiffindose 🍛</span>
+        </div>
+        <div class="user-badge">
+            <span>👤 <%= user.name %></span>
+        </div>
+    </header>
+
+    <!-- Slide-out Side Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+    <aside class="side-drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <h3>Menu</h3>
+            <button class="close-btn" onclick="toggleDrawer()">✕</button>
+        </div>
+        <div class="drawer-links">
+            <a href="/dashboard/<%= user._id %>" class="drawer-item">📊 Dashboard</a>
+            <a href="/settings/<%= user._id %>" class="drawer-item active">⚙️ Settings & Profile</a>
+            <a href="/logout" class="drawer-item logout-item">🚪 Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Settings Container -->
+    <main class="settings-main-content">
+        <div class="settings-card">
+            <div class="settings-header">
+                <h2>Account Settings</h2>
+                <p>Update your profile details and delivery address</p>
+            </div>
+
+            <form action="/update-settings/<%= user._id %>" method="POST">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" value="<%= user.name %>" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address (Locked)</label>
+                    <input type="email" value="<%= user.email %>" disabled class="disabled-input" />
+                </div>
+
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <textarea name="address" rows="3" required><%= user.address %></textarea>
+                </div>
+
+                <div class="settings-actions">
+                    <button type="submit" class="action-btn">Save Changes</button>
+                    <a href="/dashboard/<%= user._id %>" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('sideDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

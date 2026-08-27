@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tiffindose</title>
+    <link rel="stylesheet" href="/global.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="card auth-card">
+            <div class="auth-header">
+                <h2>Welcome Back 🍛</h2>
+                <p>Login to manage your tiffin subscription</p>
+            </div>
+
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Enter your email" required />
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter your password" required />
+                </div>
+
+                <button type="submit" class="action-btn">Sign In</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Don't have an account? <a href="/">Register here</a></p>
+                <p class="admin-link-wrapper">
+                    <a href="/admin-login" class="admin-sub-link">🔑 Login as Admin</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
